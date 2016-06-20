@@ -1,0 +1,19 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Coverage\\": "src/Coverage/"
+    }
+  },
+  "require": {
+    "efrogg/webservice": "dev-master"
+  },
+
+
+
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/raphael-homann/efroggWebservice.git"
+    }
+  ]
+}
