@@ -9,7 +9,8 @@ use Silex\Application;
 
 $autoloader = require "vendor/autoload.php";
 
-$bootstrap = new WebserviceBootstrap();
+$bootstrap = new WebserviceBootstrap(array("allow_debug"=>true));
+$bootstrap->setAuth("9D22NNDJ721JHMMGECKRPTMHHKPGHPPV");
 $bootstrap->addProvider("/api",new CoverageProvider($app));
 $bootstrap->setDb(new PdoDbAdapter(new PDO("mysql:dbname=web;host=test_mysql","root","root")));
 $bootstrap->run();

@@ -24,7 +24,8 @@ class CoverageProvider implements ControllerProviderInterface{
         $app["coverage"] = function($app) {
             return new CoverageController($app['db']);
         };
-        $controllers->get("/test/{id}", "coverage:find");
+//        $controllers->get("/test/{id}", "coverage:find");
+        $controllers->post("/sendCoverage", "coverage:sendCoverage");
 
         return $controllers;
     }
