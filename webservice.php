@@ -1,5 +1,5 @@
 <?php
-use Coverage\CoverageProvider;
+use efrogg\Coverage\CoverageProvider;
 use efrogg\Db\Adapters\Mysql\MysqlDbAdapter;
 use efrogg\Db\Adapters\Pdo\PdoDbAdapter;
 use eFrogg\Webservice\Exception\HttpJsonException;

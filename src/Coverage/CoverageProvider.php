@@ -1,8 +1,8 @@
 <?php
-namespace Coverage;
+namespace efrogg\Coverage;
 
 
-use Coverage\Controllers\CoverageController;
+use efrogg\Coverage\Controllers\CoverageController;
 use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;

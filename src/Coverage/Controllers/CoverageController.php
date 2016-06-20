@@ -1,6 +1,6 @@
 <?php
 
-namespace Coverage\Controllers;
+namespace efrogg\Coverage\Controllers;
 
 use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Webservice\Webservice;
