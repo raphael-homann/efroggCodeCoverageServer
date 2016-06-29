@@ -1,0 +1,11 @@
+{% extends "global.twig" %}
+
+{% block content %}
+    {% for project in projects %}
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-primary" href="/project/{{ project.id_project }}">{{ project.name }} ></a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

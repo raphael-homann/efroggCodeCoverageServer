@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f32955567221d2dd39f15ed7964ed64d",
-    "content-hash": "37c9ece6c6360ece3c39986b104ea695",
+    "hash": "9315eb528e70e7a46776a881c23ff569",
+    "content-hash": "bbf97dcb3393c0ed1597c65bc54a987f",
     "packages": [
         {
             "name": "efrogg/webservice",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphael-homann/efroggWebservice.git",
-                "reference": "462a18aef1a697ecc527843f44c6694a19b6a65b"
+                "reference": "51280b4f1e9492f0b93da5830b68f42f8eb44681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphael-homann/efroggWebservice/zipball/462a18aef1a697ecc527843f44c6694a19b6a65b",
-                "reference": "462a18aef1a697ecc527843f44c6694a19b6a65b",
+                "url": "https://api.github.com/repos/raphael-homann/efroggWebservice/zipball/51280b4f1e9492f0b93da5830b68f42f8eb44681",
+                "reference": "51280b4f1e9492f0b93da5830b68f42f8eb44681",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,48 @@
                 "source": "https://github.com/raphael-homann/efroggWebservice/tree/master",
                 "issues": "https://github.com/raphael-homann/efroggWebservice/issues"
             },
-            "time": "2016-06-17 17:42:11"
+            "time": "2016-06-21 13:08:04"
+        },
+        {
+            "name": "picorm/picorm",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iNem0o/PicORM.git",
+                "reference": "684a37e9ccbf29314e62e0314105d130c561521d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iNem0o/PicORM/zipball/684a37e9ccbf29314e62e0314105d130c561521d",
+                "reference": "684a37e9ccbf29314e62e0314105d130c561521d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PicORM": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "inem0o",
+                    "email": "contact@inem0o.fr",
+                    "homepage": "https://github.com/iNem0o"
+                }
+            ],
+            "description": "Lightweight ORM",
+            "homepage": "https://github.com/iNem0o/PicORM",
+            "keywords": [
+                "orm"
+            ],
+            "time": "2015-10-31 09:37:00"
         },
         {
             "name": "pimple/pimple",
@@ -749,13 +790,75 @@
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
             "time": "2016-05-24 10:06:56"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.24.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.24-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2016-05-30 09:11:59"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "efrogg/webservice": 20
+        "efrogg/webservice": 20,
+        "picorm/picorm": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

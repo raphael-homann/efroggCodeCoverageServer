@@ -5,7 +5,10 @@
     }
   },
   "require": {
-    "efrogg/webservice": "dev-master"
+    "efrogg/webservice": "dev-master",
+    "picorm/picorm":"dev-master",
+    "twig/twig": "^1.24",
+    "silex/silex": "~2.0"
   },
 
 

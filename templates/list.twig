@@ -1,0 +1,52 @@
+
+{% extends "global.twig" %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {% for item in breadcrumb %}
+        <li {% if loop.last %}class="active"{% endif %}>
+            <a href='/session/{{ session.id_session }}/file/{{ item.id_file }}'> {{ item.path|toPath }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}
+{% block content %}
+
+        {% for item in files if item.count_files>0%}
+        <div class="row">
+            <div class="col-xs-4">
+                [{{ item.is_dir?'d':'f' }}] <a href='/session/{{ session.id_session }}/file/{{ item.id_file }}'>{{ item.path|toPath }}</a>
+            </div>
+            <div class="col-xs-6">
+                <div class="progress">
+                    <div class="coverage-list-item-text">{{ item.covered }}/{{ item.effective_lines is null?item.total_lines:item.effective_lines}} / ({{ item.count_files }})</div>
+
+                    {% spaceless %}
+                        <span class="progress-bar progress-bar-success"
+                              style="width: {{ item.percent_covered }}%;"></span>
+                        <span class="progress-bar progress-bar-danger"
+                              style="width: {{ item.percent_uncovered }}%;"></span>
+                        <span class="progress-bar progress-bar-warning "
+                              style="width: {{ item.percent_deadcode }}%;"></span>
+                    {% endspaceless %}
+                </div>
+            </div>
+        </div>
+
+            {#<div class="coverage-list">#}
+            {#<div class="coverage-list-item-text">{{ item.covered }}/{{ item.total_lines }} / {{ item.covered }}-{{ item.uncovered }}-{{ item.deadcode }}</div>#}
+            {#<div class="coverage-list-item coverage-covered" style="width:{{ item.percent_covered }}%"></div>#}
+            {#<div class="coverage-list-item coverage-uncovered" style="width:{{ item.percent_uncovered }}%"></div>#}
+            {#<div class="coverage-list-item coverage-deadcode" style="width:{{ item.percent_deadcode }}%"></div>#}
+            {##}
+            {#</div>#}
+        {% endfor %}
+
+    {% if file_details is defined %}
+        <div class="coverage-lines">
+            {% for line in file_details %}
+                <div class="coverage-line coverage-{{ line.status_txt }}">{{ line.content }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

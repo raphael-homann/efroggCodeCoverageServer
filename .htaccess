@@ -1,3 +1,8 @@
 RewriteEngine on
 
+RewriteRule ^webservice.php$ - [QSA,L]
+RewriteRule ^index.php$ - [QSA,L]
+
+RewriteRule ^public/(.*)$ - [QSA,L]
 RewriteRule ^api/(.*)$ webservice.php [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]

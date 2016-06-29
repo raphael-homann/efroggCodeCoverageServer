@@ -1,0 +1,54 @@
+ .coverage-list {
+     display: inline-block;
+     width: 300px;
+     height: 1em;
+     border: solid 1px #CCC;
+     background: white;
+ }
+
+.coverage-list-item {
+    display: inline-block;
+    height: 1em;
+}
+
+.coverage-list-item-text {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.coverage-covered {
+    background: rgba(0,255,0,0.2);
+}
+
+.coverage-uncovered {
+    background: rgba(255,0,0,0.2);
+}
+
+.coverage-deadcode {
+    background: rgba(255, 126, 39, 0.8);
+}
+
+.coverage-useless {
+    color: gray;
+}
+
+.coverage-lines {
+}
+
+.coverage-line {
+    white-space: pre;
+    display: block;
+    font-family: monospace;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.coverage-line:hover {
+    overflow: visible;
+}
+.progress {
+    margin-bottom: 1px;
+    position: relative;
+}
