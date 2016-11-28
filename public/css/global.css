@@ -1,10 +1,10 @@
- .coverage-list {
-     display: inline-block;
-     width: 300px;
-     height: 1em;
-     border: solid 1px #CCC;
-     background: white;
- }
+.coverage-list {
+    display: inline-block;
+    width: 300px;
+    height: 1em;
+    border: solid 1px #CCC;
+    background: white;
+}
 
 .coverage-list-item {
     display: inline-block;
@@ -19,11 +19,11 @@
 }
 
 .coverage-covered {
-    background: rgba(0,255,0,0.2);
+    background: rgba(0, 255, 0, 0.2);
 }
 
 .coverage-uncovered {
-    background: rgba(255,0,0,0.2);
+    background: rgba(255, 0, 0, 0.2);
 }
 
 .coverage-deadcode {
@@ -37,18 +37,41 @@
 .coverage-lines {
 }
 
+.coverage-line-number {
+    display: inline-block;
+    color: #666;
+    width: 40px;
+    border-right: solid 1px #ccc;
+    margin-right: 10px;
+}
+
+.coverage-line-content {
+    display: inline-block;
+    width: calc(100% - 50px);
+}
+
 .coverage-line {
     white-space: pre;
     display: block;
     font-family: monospace;
     max-width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    /*text-overflow: ellipsis;*/
+    overflow:visible;
+
 }
+
 .coverage-line:hover {
     overflow: visible;
+    background-color: #eaeaea;
 }
+
 .progress {
     margin-bottom: 1px;
     position: relative;
+}
+
+.line-number {
+    display: inline-block;
+    width: 50px;
 }

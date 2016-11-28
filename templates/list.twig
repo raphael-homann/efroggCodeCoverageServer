@@ -43,8 +43,8 @@
 
     {% if file_details is defined %}
         <div class="coverage-lines">
-            {% for line in file_details %}
-                <div class="coverage-line coverage-{{ line.status_txt }}">{{ line.content }}</div>
+            {% for k,line in file_details %}
+                <div class="coverage-line coverage-{{ line.status_txt }}"><div class="coverage-line-number">{{ k }}</div><div class="coverage-line-content">{{ line.content }}</div></div>
             {% endfor %}
         </div>
     {% endif %}
