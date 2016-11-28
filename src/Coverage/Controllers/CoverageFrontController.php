@@ -40,52 +40,70 @@ class CoverageFrontController
         $this->app = $app;
         $this->db = $app["db"];
         $this->twig = $app["twig"];
-        $this->twig->addFilter(new \Twig_SimpleFilter("toPath",function($str) {return $this->extractFilename($str);}));
+        $this->twig->addFilter(new \Twig_SimpleFilter("toPath", function ($str) {
+            return $this->extractFilename($str);
+        }));
     }
 
-    public function extractFilename($path) {
-        if(empty($path)) return '[HOME]';
-        return array_pop(explode("/",$path));
+    public function extractFilename($path)
+    {
+        if (empty($path)) {
+            return '[HOME]';
+        }
+        return array_pop(explode("/", $path));
     }
 
 
-
-    public function displayFile($id_session,$id_file) {
+    public function displayFile($id_session, $id_file)
+    {
         $renderer = new CoverageDirectoryRenderer('cc_files', $this->db);
 //        $renderer->setTwig($this->twig);
         $renderer->setIdSession($id_session);
         $renderer->setIdFile($id_file);
-         return new Response($this->twig->render("list.twig",$renderer->getData()));
+        return new Response($this->twig->render("list.twig", $renderer->getData()));
     }
 
-    public function displaySession($id_session) {
-        $session = CoverageSession::findOne(["id_session"=>$id_session]);
-        if($session) {
+    public function deleteSession($id_session)
+    {
+        //        todo : delete de tous les fichiers et autres trucs liés !!!
+        $session = CoverageSession::findOne(["id_session" => $id_session]);
+        $id_project = $session->id_project;
+        $session->delete();
+        return RedirectResponse::create("/project/" . $id_project);
+    }
+
+    public function displaySession($id_session)
+    {
+        $session = CoverageSession::findOne(["id_session" => $id_session]);
+        if ($session) {
             // cherche le point racine du projet
             $file = CoverageFile::findOne([
-                "level_depth"=>0,
-                "id_project"=>$session->id_project
+                "level_depth" => 0,
+                "id_project" => $session->id_project
             ]);
-            if($file) {
-                return $this->displayFile($id_session,$file->id_file);
+            if ($file) {
+                return $this->displayFile($id_session, $file->id_file);
             }
-            return new Response("root not found",404);
+            return new Response("root not found", 404);
         }
-        return new Response("session not found",404);
+        return new Response("session not found", 404);
     }
-    public function displayProject($id_project) {
-        $project = CoverageProject::findOne(["id_project"=>$id_project]);
 
-        if($project) {
-            $sessions = CoverageSession::find(["id_project"=>$id_project]);
-            return new Response($this->twig->render("project.twig",[
-                "project"=>$project,
-                "sessions"=>$sessions
+    public function displayProject($id_project)
+    {
+        $project = CoverageProject::findOne(["id_project" => $id_project]);
+
+        if ($project) {
+            $sessions = CoverageSession::find(["id_project" => $id_project]);
+            return new Response($this->twig->render("project.twig", [
+                "project" => $project,
+                "sessions" => $sessions
             ]));
 
         }
-        return new Response("project not found",404);
+        return new Response("project not found", 404);
     }
+
     public function displayIndex()
     {
         $projects = CoverageProject::find();
@@ -94,34 +112,37 @@ class CoverageFrontController
         ]));
     }
 
-    public function completeProject($id_project) {
+    public function completeProject($id_project)
+    {
         $api = new CoverageApiController($this->db);
         $api->completeProject($id_project);
-        return RedirectResponse::create("/project/".$id_project);
+        return RedirectResponse::create("/project/" . $id_project);
 
     }
 
-    public function displayConfigureProject($id_project) {
-        $project = CoverageProject::findOne(["id_project"=>$id_project]);
+    public function displayConfigureProject($id_project)
+    {
+        $project = CoverageProject::findOne(["id_project" => $id_project]);
         return new Response($this->twig->render("configure-project.twig", [
             "project" => $project
         ]));
     }
-    public function configureProject($id_project,Request $request) {
+
+    public function configureProject($id_project, Request $request)
+    {
         var_dump($id_project);
-        $project = CoverageProject::findOne(["id_project"=>$id_project]);
-        if($project->isNew()) {
-            return new Response("project not found",404);
+        $project = CoverageProject::findOne(["id_project" => $id_project]);
+        if ($project->isNew()) {
+            return new Response("project not found", 404);
         } else {
-            $project->path=rtrim($request->request->get("path"),"/");
-            if($project->save()) {
-                return RedirectResponse::create("/project/".$id_project);
+            $project->path = rtrim($request->request->get("path"), "/");
+            if ($project->save()) {
+                return RedirectResponse::create("/project/" . $id_project);
             } else {
                 throw new Exception("erreur sauvegarde");
             }
         }
     }
-
 
 
 }

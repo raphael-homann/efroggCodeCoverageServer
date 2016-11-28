@@ -38,6 +38,7 @@ class CoverageFrontProvider implements ControllerProviderInterface
         $controllers->get("/project/{id_project}/complete", "front:completeProject");
         $controllers->get("/session/{id_session}", "front:displaySession");
         $controllers->get("/session/{id_session}/file/{id_file}", "front:displayFile");
+        $controllers->get("/session/{id_session}/delete", "front:deleteSession");
         $controllers->get("/project/{id_project}/configure", "front:displayConfigureProject");
         $controllers->post("/project/{id_project}/configure", "front:configureProject");
 

@@ -1,19 +1,23 @@
 {% extends "global.twig" %}
 
 {% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/project/{{ project.id_project }}/complete" class="btn btn-warning pull-right">completer</a>
+            <a href="/project/{{ project.id_project }}/configure" class="btn btn-warning pull-right">configurer</a>
+        </div>
+    </div>
     <h1>{{ project.name }}</h1>
     {% for session in sessions %}
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/project/{{ project.id_project }}/configure" class="btn btn-warning pull-right">configurer</a>
-                <a href="/project/{{ project.id_project }}/complete" class="btn btn-warning pull-right">completer</a>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-6">
                 <a class="btn btn-primary" href="/session/{{ session.id_session }}">S{{ session.id_session }} ></a>
                 <span>{{ session.started_at }}</span>
             </div>
+            <div class="col-md-6">
+                <a href="/session/{{ session.id_session }}/delete" class="btn btn-danger pull-right">X</a>
+            </div>
+
         </div>
 
     {% endfor %}
