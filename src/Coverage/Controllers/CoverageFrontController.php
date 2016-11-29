@@ -13,7 +13,7 @@ use efrogg\Coverage\Renderer\CoverageDirectoryRenderer;
 use efrogg\Coverage\Storage\CoverageFile;
 use efrogg\Coverage\Storage\CoverageProject;
 use efrogg\Coverage\Storage\CoverageSession;
-use efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbAdapter;
 use PicORM\Exception;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -63,14 +63,6 @@ class CoverageFrontController
         return new Response($this->twig->render("list.twig", $renderer->getData()));
     }
 
-    public function deleteSession($id_session)
-    {
-        //        todo : delete de tous les fichiers et autres trucs liés !!!
-        $session = CoverageSession::findOne(["id_session" => $id_session]);
-        $id_project = $session->id_project;
-        $session->delete();
-        return RedirectResponse::create("/project/" . $id_project);
-    }
 
     public function displaySession($id_session)
     {
@@ -144,5 +136,50 @@ class CoverageFrontController
         }
     }
 
+
+    public function deleteProject($id_project) {
+        $sessions = CoverageSession::find(array("id_project" => $id_project));
+        foreach($sessions as $session) {
+            $this->doDeleteSession($session);
+        }
+        $project = CoverageProject::findOne(["id_project" => $id_project]);
+        if($this->doDeleteProject($project)) {
+            return RedirectResponse::create("/");
+
+        }
+        return Response::create("Erreur",503);
+
+    }
+    public function deleteSession($id_session)
+    {
+        $session = CoverageSession::findOne(["id_session" => $id_session]);
+        if($session && $this->doDeleteSession($session)) {
+            return RedirectResponse::create("/project/" . $session->id_project);
+        }
+        return Response::create("Erreur",503);
+    }
+
+    private function doDeleteSession(CoverageSession $session)
+    {
+        $result = $this->db->execute("DELETE FROM cc_lines WHERE id_session = ?",array($session->id_session));
+        if($result->isValid()) {
+            echo "<br>deleted session [".$session->id_session."]: ".$this->db->getAffectedRows()." lines";
+            return $session->delete();
+        } else {
+            throw new Exception($result->getErrorMessage());
+        }
+    }
+
+    private function doDeleteProject(CoverageProject $project)
+    {
+        $result = $this->db->execute("DELETE FROM cc_files WHERE id_project = ?",array($project->id_project));
+        if($result->isValid()) {
+            echo "<br>deleted project [".$project->id_project."]: ".$this->db->getAffectedRows()." files";
+            return $project->delete();
+        } else {
+            throw new Exception($result->getErrorMessage());
+        }
+
+    }
 
 }

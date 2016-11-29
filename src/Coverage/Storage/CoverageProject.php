@@ -33,4 +33,13 @@ class CoverageProject extends StorageModel
         self::addRelationOneToMany('id_project','\\efrogg\\Coverage\\Storage\\CoverageFile','id_project');
     }
 
+    public function getFileCount() {
+        return $this->db->execute("SELECT count(*) AS nb FROM cc_files WHERE id_project = ?",array($this->id_project))
+            ->fetchObject()->nb;
+    }
+    public function getLineCount() {
+        return $this->db->execute("SELECT SUM(line_count) AS nb FROM cc_files WHERE id_project = ?",array($this->id_project))
+            ->fetchObject()->nb;
+    }
+
 }

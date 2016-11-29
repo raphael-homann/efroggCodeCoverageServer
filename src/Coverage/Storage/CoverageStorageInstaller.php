@@ -12,8 +12,8 @@ use efrogg\Coverage\Storage\Migrations\InstallFiles;
 use efrogg\Coverage\Storage\Migrations\InstallLines;
 use efrogg\Coverage\Storage\Migrations\InstallProjects;
 use efrogg\Coverage\Storage\Migrations\InstallSessions;
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Migration\MigrationManager;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Migration\MigrationManager;
 
 class CoverageStorageInstaller extends MigrationManager {
     /**

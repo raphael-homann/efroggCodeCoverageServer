@@ -9,14 +9,28 @@
 namespace efrogg\Coverage\Storage;
 
 
-use efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbAdapter;
 use PicORM\Model;
+use Silex\Application;
 
 class StorageModel extends Model
 {
 
+
+    /** @var  Application */
+    protected static $app;
+
     /** @var  DbAdapter */
     protected $db;
+
+    /**
+     * StorageModel constructor.
+     */
+    public function __construct()
+    {
+        $this->setDb(self::$app["db"]);
+    }
+
 
     public static function findOrCreate($where=array(),$order=array()) {
         $found = self::findOne($where,$order);
@@ -33,6 +47,17 @@ class StorageModel extends Model
 
     public function setDb(DbAdapter $db) {
         $this->db = $db;
+    }
+
+    public function hydrate($data, $strictLoad = true)
+    {
+        parent::hydrate($data, $strictLoad);
+        $this->setDb(self::$app["db"]);
+    }
+
+
+    public static function setApp(Application $app) {
+        self::$app = $app;
     }
 
 }

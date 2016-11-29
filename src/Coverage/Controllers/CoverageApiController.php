@@ -7,9 +7,9 @@ use efrogg\Coverage\Storage\CoverageProject;
 use efrogg\Coverage\Storage\CoverageProjectExplorer;
 use efrogg\Coverage\Storage\CoverageSession;
 use efrogg\Coverage\Storage\CoverageStorageInstaller;
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Adapters\DbTools;
-use efrogg\Webservice\Webservice;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Tools\DbTools;
+use Efrogg\Webservice\Webservice;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +19,11 @@ class CoverageApiController extends Webservice
 {
     protected $projectName;
     protected $sessionId;
+    protected $exclusions = [
+        "/_deprecated/i",
+        "/tcpdf/i",
+        "/fpdi/"
+    ];
 
     public function __construct(DbAdapter $db)
     {
@@ -109,6 +114,7 @@ class CoverageApiController extends Webservice
         if($project) {
             if(file_exists($project->path) && is_dir($project->path)) {
                 $explorer = new CoverageProjectExplorer($idProject,$project->path);
+                $explorer -> addExclusions($this->exclusions);
                 $explorer -> discover();
                 $this->updateNtree($idProject);
                 return new JsonResponse(array("files"=>$explorer->getAddedFiles()+$explorer->getUpdatedFiles()));

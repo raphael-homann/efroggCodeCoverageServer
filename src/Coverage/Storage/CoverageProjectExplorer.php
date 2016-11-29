@@ -10,10 +10,11 @@ namespace efrogg\Coverage\Storage;
 
 
 use efrogg\Coverage\Controllers\FolderIterator;
-use efrogg\Db\Adapters\DbTools;
+use Efrogg\Db\Tools\DbTools;
 
 class CoverageProjectExplorer
 {
+    protected $exclusions = [];
     private $idProject;
     private $rootPath;
 
@@ -45,6 +46,8 @@ class CoverageProjectExplorer
 
     private function addFile($filePath)
     {
+        if(!$this->accept($filePath)) return;
+
         $relativePath = $filePath;
         if (strpos($filePath, $this->rootPath) === 0) {
             $relativePath = substr($filePath, strlen($this->rootPath));
@@ -86,5 +89,21 @@ class CoverageProjectExplorer
     public function getUpdatedFiles()
     {
         return $this->updatedFiles;
+    }
+
+    public function addExclusions($exclusions)
+    {
+        if(!is_array($exclusions)) $exclusions=array($exclusions);
+        foreach($exclusions as $exclusion) {
+            $this->exclusions[]=$exclusion;
+        }
+    }
+
+    private function accept($filePath)
+    {
+        foreach($this->exclusions as $exclusion) {
+            if(preg_match($exclusion,$filePath)) return false;
+        }
+        return true;
     }
 }

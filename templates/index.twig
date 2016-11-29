@@ -6,6 +6,10 @@
             <div class="col-md-4">
                 <a class="btn btn-primary" href="/project/{{ project.id_project }}">{{ project.name }} ></a>
             </div>
+            <div class="col-md-8">
+                <a href="/project/{{ project.id_project }}/delete" class="btn btn-danger pull-right">X</a>
+            </div>
+
         </div>
     {% endfor %}
 {% endblock %}

@@ -8,9 +8,9 @@
 
 namespace efrogg\Coverage\Storage;
 
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Migration\AutoInstallMigration;
-use efrogg\Db\Migration\MigrationManager;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Migration\AutoInstallMigration;
+use Efrogg\Db\Migration\MigrationManager;
 
 class CoverageStorage {
     /**

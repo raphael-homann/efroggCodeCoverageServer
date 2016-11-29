@@ -7,8 +7,7 @@
  */
 
 use efrogg\Coverage\Provider\CoverageFrontProvider;
-use efrogg\Coverage\Renderer\CoverageDirectoryRenderer;
-use efrogg\Db\Adapters\Pdo\PdoDbAdapter;
+use Efrogg\Db\Adapters\Pdo\PdoDbAdapter;
 use PicORM\PicORM;
 use Silex\Provider\ServiceControllerServiceProvider;
 
@@ -22,6 +21,7 @@ PicORM::configure(array(
 
 
 $application = new Silex\Application();
+\efrogg\Coverage\Storage\StorageModel::setApp($application);
 
 $application["debug"] = true;
 $application["db"] = new PdoDbAdapter(PicORM::getDataSource());

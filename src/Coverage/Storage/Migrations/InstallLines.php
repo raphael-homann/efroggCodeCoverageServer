@@ -9,7 +9,7 @@
 namespace efrogg\Coverage\Storage\Migrations;
 
 
-use efrogg\Db\Migration\Migration;
+use Efrogg\Db\Migration\Migration;
 
 class InstallLines extends Migration
 {

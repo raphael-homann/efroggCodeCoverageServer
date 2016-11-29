@@ -2,7 +2,7 @@
 
 namespace efrogg\Coverage\Renderer;
 
-use efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbAdapter;
 
 class DirectoryRenderer {
     protected $table_name;

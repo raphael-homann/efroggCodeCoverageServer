@@ -8,13 +8,31 @@
         </div>
     </div>
     <h1>{{ project.name }}</h1>
+    <p>
+        files : {{ project.getFileCount() }}<br>
+        lines : {{ project.getLineCount() }}<br>
+    </p>
     {% for session in sessions %}
         <div class="row">
-            <div class="col-md-6">
-                <a class="btn btn-primary" href="/session/{{ session.id_session }}">S{{ session.id_session }} ></a>
+            <div class="col-md-4">
+                <a class="btn btn-primary" href="/session/{{ session.id_session }}">{{ session.session_name }} ({{ session.id_session }}) ></a>
                 <span>{{ session.started_at }}</span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                {% set detail=session.getLinesDetail() %}
+                <div class="progress">
+                    <div class="coverage-list-item-text">{{ detail.covered |number_format(0,'.',' ') }} / {{ detail.total |number_format(0,'.',' ')}} ({{ (detail.covered*100/detail.total) | round(2) }}%)</div>
+                    {% spaceless %}
+                        <span class="progress-bar progress-bar-success"
+                              style="width: {{ detail.covered*100/detail.total }}%;"></span>
+                        <span class="progress-bar progress-bar-danger"
+                              style="width: {{ detail.uncovered*100/detail.total }}%;"></span>
+                        <span class="progress-bar progress-bar-warning "
+                              style="width: {{ detail.dead_code*100/detail.total }}%;"></span>
+                    {% endspaceless %}
+                </div>
+            </div>
+            <div class="col-md-4">
                 <a href="/session/{{ session.id_session }}/delete" class="btn btn-danger pull-right">X</a>
             </div>
 
