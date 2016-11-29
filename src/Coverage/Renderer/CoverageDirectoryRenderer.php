@@ -172,18 +172,20 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
 
         $real_total = 0;
         $max_lines = 0;
-        $max_ratio = 0;
-        $pow=.3;
+        $min_lines = 1000000;
+//        $max_ratio = 0;
         foreach($all as $file) {
             $k = $indexData[$file["id_file"]];
             $data[$k]["covered"] = $file['covered'];
             $data[$k]["uncovered"] = $file['uncovered'];
             $data[$k]["deadcode"] = $file['deadcode'];
-            $data[$k]["effective_lines"] = ($file['covered']+$file['uncovered']+$file['deadcode']);
+            $data[$k]["effective_lines"] = $data[$k]["total_lines"];// ($file['covered']+$file['uncovered']+$file['deadcode']);
             $real_total += $data[$k]["effective_lines"];
             $max_lines = max($max_lines,$data[$k]["effective_lines"]);
-            $max_ratio = max($max_ratio,pow($data[$k]["effective_lines"],$pow));
+            $min_lines = min($min_lines,$data[$k]["effective_lines"]);
+//            $max_ratio = max($max_ratio,pow($data[$k]["effective_lines"],$pow));
         }
+        $log=5000/max(1,(min(2,round($max_lines/max(100,$min_lines)))));
 //        var_dump($all);
         foreach($data as &$item) {
 //print_r($max_lines);
@@ -192,15 +194,15 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
             $scale = $item["effective_lines"];
 //            $scale = $scale;
             if($item["effective_lines"]>0) {
-                $ratio = pow($item["effective_lines"],$pow)/$max_ratio;
+//                $ratio = pow($item["effective_lines"],$pow)/$max_ratio;
 //                $reste = $item["effective_lines"]-$item['covered']-$item['deadcode']-$item['covered'];
-//                $ratio = 1;
+                $ratio = log(($item["effective_lines"]*($log-1)/$max_lines)+1,$log);
 //                $item['covered']=100;
-                $item["percent_covered"] = floor(1000*($item['covered']) / $scale)/10;
-                $item["percent_uncovered"] = floor(1000*($item['uncovered']) / $scale)/10;
-                $item["percent_deadcode"] = floor(1000*($item['deadcode']) / $scale)/10;
-                $item["percent_deadcode"] = floor(1000*($item['deadcode'])/ $scale)/10;
-                $item["ratio"] = max(20,floor(1000*$ratio)/10);
+                $item["percent_covered"] = floor(1000*($item['covered'])*1 / $scale)/10;
+                $item["percent_uncovered"] = floor(1000*($item['uncovered'])*1 / $scale)/10;
+                $item["percent_deadcode"] = floor(1000*($item['deadcode'])*1 / $scale)/10;
+//                $item["percent_deadcode"] = floor(1000*($item['deadcode'])/ $scale)/10;
+                $item["ratio"] = 30+max(0,floor(700*$ratio)/10);
             } else {
 //            if($item["total_lines"]>0) {
 //                $item["percent_covered"] = 100*round($item['covered'] / $item["total_lines"], 3);
