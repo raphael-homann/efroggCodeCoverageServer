@@ -6,7 +6,7 @@
  * Time: 17:02
  */
 
-use efrogg\Coverage\Provider\CoverageFrontProvider;
+use Efrogg\Coverage\Provider\CoverageFrontProvider;
 use Efrogg\Db\Adapters\Pdo\PdoDbAdapter;
 use PicORM\PicORM;
 use Silex\Provider\ServiceControllerServiceProvider;

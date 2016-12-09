@@ -6,7 +6,7 @@
  * Time: 17:00
  */
 
-namespace efrogg\Coverage\Controllers;
+namespace Efrogg\Coverage\Controllers;
 
 
 class FolderIterator extends \RecursiveFilterIterator {

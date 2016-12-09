@@ -6,12 +6,12 @@
  * Time: 11:24
  */
 
-namespace efrogg\Coverage\Renderer;
+namespace Efrogg\Coverage\Renderer;
 
 
-use efrogg\Coverage\Storage\CoverageFile;
-use efrogg\Coverage\Storage\CoverageProject;
-use efrogg\Coverage\Storage\CoverageSession;
+use Efrogg\Coverage\Storage\CoverageFile;
+use Efrogg\Coverage\Storage\CoverageProject;
+use Efrogg\Coverage\Storage\CoverageSession;
 use Twig_SimpleFilter;
 
 class CoverageDirectoryRenderer extends DirectoryRenderer

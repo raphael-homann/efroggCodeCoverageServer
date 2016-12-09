@@ -6,10 +6,10 @@
  * Time: 08:56
  */
 
-namespace efrogg\Coverage\Provider;
+namespace Efrogg\Coverage\Provider;
 
 
-use efrogg\Coverage\Controllers\CoverageFrontController;
+use Efrogg\Coverage\Controllers\CoverageFrontController;
 use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;

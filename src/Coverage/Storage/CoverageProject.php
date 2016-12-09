@@ -6,7 +6,7 @@
  * Time: 16:13
  */
 
-namespace efrogg\Coverage\Storage;
+namespace Efrogg\Coverage\Storage;
 
 
 

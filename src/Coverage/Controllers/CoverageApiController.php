@@ -1,12 +1,12 @@
 <?php
 
-namespace efrogg\Coverage\Controllers;
+namespace Efrogg\Coverage\Controllers;
 
-use efrogg\Coverage\Storage\CoverageFile;
-use efrogg\Coverage\Storage\CoverageProject;
-use efrogg\Coverage\Storage\CoverageProjectExplorer;
-use efrogg\Coverage\Storage\CoverageSession;
-use efrogg\Coverage\Storage\CoverageStorageInstaller;
+use Efrogg\Coverage\Storage\CoverageFile;
+use Efrogg\Coverage\Storage\CoverageProject;
+use Efrogg\Coverage\Storage\CoverageProjectExplorer;
+use Efrogg\Coverage\Storage\CoverageSession;
+use Efrogg\Coverage\Storage\CoverageStorageInstaller;
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Tools\DbTools;
 use Efrogg\Webservice\Webservice;

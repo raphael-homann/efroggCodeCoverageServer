@@ -6,10 +6,10 @@
  * Time: 12:12
  */
 
-namespace efrogg\Coverage\Storage;
+namespace Efrogg\Coverage\Storage;
 
 
-use efrogg\Coverage\Controllers\FolderIterator;
+use Efrogg\Coverage\Controllers\FolderIterator;
 use Efrogg\Db\Tools\DbTools;
 
 class CoverageProjectExplorer

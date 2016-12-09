@@ -6,7 +6,7 @@
  * Time: 15:54
  */
 
-namespace efrogg\Coverage\Storage;
+namespace Efrogg\Coverage\Storage;
 
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Migration\AutoInstallMigration;

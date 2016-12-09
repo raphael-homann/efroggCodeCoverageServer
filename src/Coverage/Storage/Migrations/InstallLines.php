@@ -6,7 +6,7 @@
  * Time: 10:11
  */
 
-namespace efrogg\Coverage\Storage\Migrations;
+namespace Efrogg\Coverage\Storage\Migrations;
 
 
 use Efrogg\Db\Migration\Migration;

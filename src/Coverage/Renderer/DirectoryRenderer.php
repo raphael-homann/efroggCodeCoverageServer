@@ -1,6 +1,6 @@
 <?php
 
-namespace efrogg\Coverage\Renderer;
+namespace Efrogg\Coverage\Renderer;
 
 use Efrogg\Db\Adapters\DbAdapter;
 

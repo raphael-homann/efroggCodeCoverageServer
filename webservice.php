@@ -1,5 +1,5 @@
 <?php
-use efrogg\Coverage\Provider\CoverageApiProvider;
+use Efrogg\Coverage\Provider\CoverageApiProvider;
 use Efrogg\Db\Adapters\Pdo\PdoDbAdapter;
 use Efrogg\Webservice\WebserviceBootstrap;
 use Silex\Application;

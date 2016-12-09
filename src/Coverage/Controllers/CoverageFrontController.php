@@ -6,13 +6,13 @@
  * Time: 09:20
  */
 
-namespace efrogg\Coverage\Controllers;
+namespace Efrogg\Coverage\Controllers;
 
 
-use efrogg\Coverage\Renderer\CoverageDirectoryRenderer;
-use efrogg\Coverage\Storage\CoverageFile;
-use efrogg\Coverage\Storage\CoverageProject;
-use efrogg\Coverage\Storage\CoverageSession;
+use Efrogg\Coverage\Renderer\CoverageDirectoryRenderer;
+use Efrogg\Coverage\Storage\CoverageFile;
+use Efrogg\Coverage\Storage\CoverageProject;
+use Efrogg\Coverage\Storage\CoverageSession;
 use Efrogg\Db\Adapters\DbAdapter;
 use PicORM\Exception;
 use Silex\Application;

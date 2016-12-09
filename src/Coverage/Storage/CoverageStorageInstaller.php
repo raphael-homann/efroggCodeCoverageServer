@@ -6,12 +6,12 @@
  * Time: 15:54
  */
 
-namespace efrogg\Coverage\Storage;
+namespace Efrogg\Coverage\Storage;
 
-use efrogg\Coverage\Storage\Migrations\InstallFiles;
-use efrogg\Coverage\Storage\Migrations\InstallLines;
-use efrogg\Coverage\Storage\Migrations\InstallProjects;
-use efrogg\Coverage\Storage\Migrations\InstallSessions;
+use Efrogg\Coverage\Storage\Migrations\InstallFiles;
+use Efrogg\Coverage\Storage\Migrations\InstallLines;
+use Efrogg\Coverage\Storage\Migrations\InstallProjects;
+use Efrogg\Coverage\Storage\Migrations\InstallSessions;
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Migration\MigrationManager;
 
