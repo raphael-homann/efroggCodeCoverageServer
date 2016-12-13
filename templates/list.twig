@@ -18,7 +18,7 @@
             </div>
             <div class="col-xs-6">
                 <div class="progress" style="width:{{ item.ratio }}%">
-                    <div  class="coverage-list-item-text">{{ item.covered }}/{{ item.effective_lines is null?item.total_lines:item.effective_lines}} / ({{ item.count_files }})</div>
+                    <div  class="coverage-list-item-text">{{ item.covered |number_format(0,'.',' ')}} / {{ (item.effective_lines is null?item.total_lines:item.effective_lines)|number_format(0,'.',' ')}} - ({{ item.count_files }} f)</div>
 
                     {% spaceless %}
                         <span class="progress-bar progress-bar-success"

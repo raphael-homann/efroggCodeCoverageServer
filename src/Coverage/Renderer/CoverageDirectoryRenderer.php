@@ -170,7 +170,7 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
 //        var_dump($sql);
         $all = $this->db->execute($sql,[$this->id_session])->fetchAll();
 
-        $real_total = 0;
+//        $real_total = 0;
         $max_lines = 0;
         $min_lines = 1000000;
 //        $max_ratio = 0;
@@ -179,8 +179,9 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
             $data[$k]["covered"] = $file['covered'];
             $data[$k]["uncovered"] = $file['uncovered'];
             $data[$k]["deadcode"] = $file['deadcode'];
-            $data[$k]["effective_lines"] = $data[$k]["total_lines"];// ($file['covered']+$file['uncovered']+$file['deadcode']);
-            $real_total += $data[$k]["effective_lines"];
+            $data[$k]["effective_lines"] = $data[$k]["total_lines"];
+            $data[$k]["effective_lines"] = ($file['covered']+$file['uncovered']+$file['deadcode']);
+//            $real_total += $data[$k]["effective_lines"];
             $max_lines = max($max_lines,$data[$k]["effective_lines"]);
             $min_lines = min($min_lines,$data[$k]["effective_lines"]);
 //            $max_ratio = max($max_ratio,pow($data[$k]["effective_lines"],$pow));
