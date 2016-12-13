@@ -22,6 +22,10 @@ class CoverageApiController extends Webservice
     protected $sessionId;
     protected $exclusions = [
         "/_deprecated/i",
+        "/_old/i",
+
+        // lib... useless ?
+        "/kint2/i",
         "/tcpdf/i",
         "/fpdi/"
     ];
@@ -245,7 +249,7 @@ class CoverageApiController extends Webservice
 
     private function resetProject($id)
     {
-        $this->db->execute("TRUNCATE TABLE cc_files");
-        $this->db->execute("TRUNCATE TABLE cc_lines");
+        $this->db->execute("DELETE FROM cc_files WHERE id_project = ?",array($id));
+//        $this->db->execute("TRUNCATE TABLE cc_lines");
     }
 }
