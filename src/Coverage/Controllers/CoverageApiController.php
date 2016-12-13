@@ -109,7 +109,6 @@ class CoverageApiController extends Webservice
 
         foreach($customData as $type => $type_data) {
             foreach($type_data as $hash => $one_data) {
-        var_dump($type,$hash);
                 $data = CoverageData::findOrCreate(array(
                     "hash" => $hash,
                     "id_session" => (int)$session->id_session
@@ -124,7 +123,6 @@ class CoverageApiController extends Webservice
                 } else {
                     $data->count += $one_data["count"];
                 }
-                var_dump($data);
                 $data->save();
             }
         }
