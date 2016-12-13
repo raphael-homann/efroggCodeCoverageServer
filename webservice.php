@@ -10,7 +10,7 @@ $autoloader = require "vendor/autoload.php";
     'datasource' => new PDO("mysql:dbname=web;host=test_mysql","root","root")
 ));
 $application = new Silex\Application();
-\efrogg\Coverage\Storage\StorageModel::setApp($application);
+\Efrogg\Coverage\Storage\StorageModel::setApp($application);
 
 $application["db"] = new PdoDbAdapter(\PicORM\PicORM::getDataSource());
 

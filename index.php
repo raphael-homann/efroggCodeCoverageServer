@@ -21,7 +21,7 @@ PicORM::configure(array(
 
 
 $application = new Silex\Application();
-\efrogg\Coverage\Storage\StorageModel::setApp($application);
+\Efrogg\Coverage\Storage\StorageModel::setApp($application);
 
 $application["debug"] = true;
 $application["db"] = new PdoDbAdapter(PicORM::getDataSource());

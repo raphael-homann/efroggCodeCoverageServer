@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9315eb528e70e7a46776a881c23ff569",
+    "hash": "990576fd12799d83c2ec041596b2e1b3",
     "content-hash": "bbf97dcb3393c0ed1597c65bc54a987f",
     "packages": [
         {
             "name": "efrogg/database",
-            "version": "v0.0.7",
+            "version": "v0.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphael-homann/DbManager.git",
-                "reference": "2ed1e59da8d9d96e05d06955e9a63349679e22b9"
+                "reference": "2b417d867ea9fe40003940844adc9df7f9530029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphael-homann/DbManager/zipball/2ed1e59da8d9d96e05d06955e9a63349679e22b9",
-                "reference": "2ed1e59da8d9d96e05d06955e9a63349679e22b9",
+                "url": "https://api.github.com/repos/raphael-homann/DbManager/zipball/2b417d867ea9fe40003940844adc9df7f9530029",
+                "reference": "2b417d867ea9fe40003940844adc9df7f9530029",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                 "mysql",
                 "pdo"
             ],
-            "time": "2016-11-22 00:55:08"
+            "time": "2016-12-07 21:10:41"
         },
         {
             "name": "efrogg/webservice",
@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphael-homann/efroggWebservice.git",
-                "reference": "31b4cac4c6c4053d1b55201d9de1b82543172f56"
+                "reference": "b3360b0c7f95f86b655b5b08fdc902dbd445fe2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphael-homann/efroggWebservice/zipball/31b4cac4c6c4053d1b55201d9de1b82543172f56",
-                "reference": "31b4cac4c6c4053d1b55201d9de1b82543172f56",
+                "url": "https://api.github.com/repos/raphael-homann/efroggWebservice/zipball/b3360b0c7f95f86b655b5b08fdc902dbd445fe2b",
+                "reference": "b3360b0c7f95f86b655b5b08fdc902dbd445fe2b",
                 "shasum": ""
             },
             "require": {
@@ -99,10 +99,10 @@
                 "webservice"
             ],
             "support": {
-                "source": "https://github.com/raphael-homann/efroggWebservice/tree/v0.1.2",
+                "source": "https://github.com/raphael-homann/efroggWebservice/tree/master",
                 "issues": "https://github.com/raphael-homann/efroggWebservice/issues"
             },
-            "time": "2016-11-22 12:11:57"
+            "time": "2016-11-29 14:26:26"
         },
         {
             "name": "picorm/picorm",
@@ -636,16 +636,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v3.1.7",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "8edf62498a1a4c57ba317664a4b698339c10cdf6"
+                "reference": "3f239c0e049d8920928674cd55e21061182b0106"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/8edf62498a1a4c57ba317664a4b698339c10cdf6",
-                "reference": "8edf62498a1a4c57ba317664a4b698339c10cdf6",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/3f239c0e049d8920928674cd55e21061182b0106",
+                "reference": "3f239c0e049d8920928674cd55e21061182b0106",
                 "shasum": ""
             },
             "require": {
@@ -674,7 +674,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -707,20 +707,20 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-08-16 14:58:24"
+            "time": "2016-11-25 12:32:42"
         },
         {
             "name": "symfony/translation",
-            "version": "v3.1.7",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "2f4b6114b75c506dd1ee7eb485b35facbcb2d873"
+                "reference": "64ab6fc0b42e5386631f408e6adcaaff8eee5ba1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/2f4b6114b75c506dd1ee7eb485b35facbcb2d873",
-                "reference": "2f4b6114b75c506dd1ee7eb485b35facbcb2d873",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/64ab6fc0b42e5386631f408e6adcaaff8eee5ba1",
+                "reference": "64ab6fc0b42e5386631f408e6adcaaff8eee5ba1",
                 "shasum": ""
             },
             "require": {
@@ -744,7 +744,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -771,20 +771,20 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-18 21:15:08"
+            "time": "2016-11-18 21:17:59"
         },
         {
             "name": "symfony/validator",
-            "version": "v3.1.7",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "5ba95c69918d98c5691c913ffab3ab1200e1441d"
+                "reference": "43e744c7e7cfaabc2f7e167cc699a38ef24012b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/5ba95c69918d98c5691c913ffab3ab1200e1441d",
-                "reference": "5ba95c69918d98c5691c913ffab3ab1200e1441d",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/43e744c7e7cfaabc2f7e167cc699a38ef24012b6",
+                "reference": "43e744c7e7cfaabc2f7e167cc699a38ef24012b6",
                 "shasum": ""
             },
             "require": {
@@ -795,7 +795,7 @@
             "require-dev": {
                 "doctrine/annotations": "~1.0",
                 "doctrine/cache": "~1.0",
-                "egulias/email-validator": "~1.2,>=1.2.1",
+                "egulias/email-validator": "~1.2,>=1.2.8|~2.0",
                 "symfony/cache": "~3.1",
                 "symfony/config": "~2.8|~3.0",
                 "symfony/expression-language": "~2.8|~3.0",
@@ -818,7 +818,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -845,7 +845,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-18 21:15:08"
+            "time": "2016-11-29 13:39:34"
         },
         {
             "name": "twig/twig",
