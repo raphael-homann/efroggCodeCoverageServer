@@ -13,13 +13,14 @@
         lines : {{ project.getLineCount() }}<br>
     </p>
     {% for session in sessions %}
+        {% set detail=session.getLinesDetail() %}
+        {% set custom_data=session.getCustomBySeverityAndType() %}
         <div class="row">
             <div class="col-md-4">
                 <a class="btn btn-primary" href="/session/{{ session.id_session }}">{{ session.session_name }} ({{ session.id_session }}) ></a>
                 <span>{{ session.started_at }}</span>
             </div>
             <div class="col-md-4">
-                {% set detail=session.getLinesDetail() %}
                 <div class="progress">
                     <div class="coverage-list-item-text">{{ detail.covered |number_format(0,'.',' ') }} / {{ detail.total |number_format(0,'.',' ')}} ({{ (detail.covered*100/detail.total) | round(2) }}%)</div>
                     {% spaceless %}
@@ -35,7 +36,22 @@
             <div class="col-md-4">
                 <a href="/session/{{ session.id_session }}/delete" class="btn btn-danger pull-right">X</a>
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/session/{{ session.id_session }}/data/error" class="btn btn-primary">errors</a>
+                {% if custom_data.errors.notice is defined %}<span class="label label-info">{{ custom_data.errors.notice }} notice</span>{% endif %}
+                {% if custom_data.errors.warning is defined %}<span class="label label-info">{{ custom_data.errors.warning }} warning</span>{% endif %}
+                {% if custom_data.errors.danger is defined %}<span class="label label-danger">{{ custom_data.errors.danger }} danger</span>{% endif %}
+                {% if custom_data.errors.error is defined %}<span class="label label-danger">{{ custom_data.errors.error }} error</span>{% endif %}
+            </div>
+            <div class="col-md-6">
+                <a href="/session/{{ session.id_session }}/data/deprecated" class="btn btn-primary">deprecated</a>
+                {% if custom_data.deprecated.notice is defined %}<span class="label label-info">{{ custom_data.deprecated.notice }} notice</span>{% endif %}
+                {% if custom_data.deprecated.warning is defined %}<span class="label label-info">{{ custom_data.deprecated.warning }} warning</span>{% endif %}
+                {% if custom_data.deprecated.danger is defined %}<span class="label label-danger">{{ custom_data.deprecated.danger }} danger</span>{% endif %}
+                {% if custom_data.deprecated.error is defined %}<span class="label label-danger">{{ custom_data.deprecated.error }} error</span>{% endif %}
+            </div>
         </div>
 
     {% endfor %}

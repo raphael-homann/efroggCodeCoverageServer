@@ -17,7 +17,6 @@ class CoverageSession extends StorageModel
     protected static $_relations = array();
 
     protected static $_tableFields = array(
-        'id_session',
         'id_project',
         'session_name',
         'started_at'
@@ -30,7 +29,8 @@ class CoverageSession extends StorageModel
 
     protected static function defineRelations() {
         // une session a un projet
-        self::addRelationOneToOne('id_project','\\efrogg\\Coverage\\Storage\\CoverageProject','id_project');
+        self::addRelationOneToOne('id_project','\\Efrogg\\Coverage\\Storage\\CoverageProject','id_project');
+        self::addRelationOneToMany('id_session','\\Efrogg\\Coverage\\Storage\\CoverageData','id_session','custom_data');
     }
 
     public function getLinesDetail() {
@@ -46,5 +46,37 @@ class CoverageSession extends StorageModel
         ];
         return $final;
 
+    }
+
+    public function getCustomBySeverityAndType() {
+        $final = [
+            "errors" => [],
+            "deprecated"=>[],
+        ];
+        foreach($this->db->execute("SELECT severity,count(*) AS nb FROM cc_data WHERE id_session = ? AND type='error' GROUP BY severity ",
+            array($this->id_session))->fetchAll() as $error) {
+            $final["errors"][$this->convertSeverity($error["severity"])] = $error["nb"];
+        }
+        foreach($this->db->execute("SELECT severity,count(*) AS nb FROM cc_data WHERE id_session = ? AND type='deprecated' GROUP BY severity ",
+            array($this->id_session))->fetchAll() as $error) {
+            $final["deprecated"][$this->convertSeverity($error["severity"])] = $error["nb"];
+        }
+        return $final;
+
+    }
+
+    private function convertSeverity($severity)
+    {
+        switch($severity) {
+            case 2:
+                return "warning";
+            case 3:
+                return "danger";
+            case 4:
+                return "error";
+//            case 1:
+            default:
+                return "notice";
+        }
     }
 }

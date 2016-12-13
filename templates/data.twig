@@ -1,0 +1,32 @@
+{% extends "global.twig" %}
+
+{% block content %}
+    {% for level,data_level in custom_data %}
+        {#<pre>{{ dump(data_level) }}</pre>#}
+        <div class="panel panel-{{ level }}">
+            <!-- Default panel contents -->
+            <div class="panel-heading">level : {{ level }}</div>
+            <!-- Table -->
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>nb</th>
+                    {% for key,value in data_level[0].data %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in data_level %}
+                    <tr>
+                        <th scope="row">{{ data.count }}</th>
+                        {% for key,value in data.data %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+{% endblock %}

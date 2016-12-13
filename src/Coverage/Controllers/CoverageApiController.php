@@ -2,6 +2,7 @@
 
 namespace Efrogg\Coverage\Controllers;
 
+use Efrogg\Coverage\Storage\CoverageData;
 use Efrogg\Coverage\Storage\CoverageFile;
 use Efrogg\Coverage\Storage\CoverageProject;
 use Efrogg\Coverage\Storage\CoverageProjectExplorer;
@@ -60,7 +61,10 @@ class CoverageApiController extends Webservice
     public function sendCoverage(Request $request, Application $application)
     {
         $this->extractProjectData($request);
-        $coverageData = $request->request->get("data");
+        $data = $request->request->get("data");
+
+        $coverageData = $data["coverage"];
+        $customData = $data["custom"];
 
         $project = CoverageProject::findOrCreate(array("name" => $this->projectName));
         if ($project->isNew()) {
@@ -99,7 +103,30 @@ class CoverageApiController extends Webservice
 
             $sql .= implode(",", $linesSQL) . " ON DUPLICATE KEY UPDATE status = GREATEST(status,VALUES(status)) ";
             $this->db->execute($sql);
+
 //            $session->addLines($lines);
+        }
+
+        foreach($customData as $type => $type_data) {
+            foreach($type_data as $hash => $one_data) {
+        var_dump($type,$hash);
+                $data = CoverageData::findOrCreate(array(
+                    "hash" => $hash,
+                    "id_session" => (int)$session->id_session
+                ));
+                if($data->isNew()) {
+//                    $data->hash = $hash;
+//                    $data->type = $type;
+                    $data->type = $type;
+                    $data->detail = json_encode($one_data["data"]);
+                    $data->severity = $one_data["severity"];
+                    $data->count = $one_data["count"];
+                } else {
+                    $data->count += $one_data["count"];
+                }
+                var_dump($data);
+                $data->save();
+            }
         }
 
         return new JsonResponse(array("ACK" => "success","session"=>$session->id_session));

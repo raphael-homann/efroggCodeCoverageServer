@@ -29,8 +29,8 @@ class CoverageProject extends StorageModel
 
     protected static function defineRelations() {
         // un projet a plusieurs sessions
-        self::addRelationOneToMany('id_project','\\efrogg\\Coverage\\Storage\\CoverageSession','id_project');
-        self::addRelationOneToMany('id_project','\\efrogg\\Coverage\\Storage\\CoverageFile','id_project');
+        self::addRelationOneToMany('id_project','\\Efrogg\\Coverage\\Storage\\CoverageSession','id_project');
+        self::addRelationOneToMany('id_project','\\Efrogg\\Coverage\\Storage\\CoverageFile','id_project');
     }
 
     public function getFileCount() {

@@ -10,6 +10,7 @@ namespace Efrogg\Coverage\Controllers;
 
 
 use Efrogg\Coverage\Renderer\CoverageDirectoryRenderer;
+use Efrogg\Coverage\Storage\CoverageData;
 use Efrogg\Coverage\Storage\CoverageFile;
 use Efrogg\Coverage\Storage\CoverageProject;
 use Efrogg\Coverage\Storage\CoverageSession;
@@ -104,6 +105,45 @@ class CoverageFrontController
         ]));
     }
 
+    public function displayData($id_session,$type_data) {
+
+        $session = CoverageSession::findOne(["id_session" => $id_session]);
+        $project = CoverageProject::findOne(["id_project" => $session->id_project]);
+        $data = CoverageData::find([
+            "id_session" => $id_session,
+            "type"=>$type_data
+        ],["count"=>"DESC"]);
+        $custom_data = [];
+        /** @var CoverageData $oneData */
+        foreach($data as $oneData) {
+            $custom_data[$this->convertSeverity($oneData->severity)][] = [
+                "count"=>$oneData->count,
+                "data"=>json_decode($oneData->detail,true)
+            ];
+        }
+        return new Response($this->twig->render("data.twig", [
+            "session" => $session,
+            "project" => $project,
+            "custom_data"=>$custom_data
+        ]));
+
+    }
+
+    private function convertSeverity($severity)
+    {
+        switch($severity) {
+            case 2:
+                return "warning";
+            case 3:
+                return "danger";
+            case 4:
+                return "danger";
+//            case 1:
+            default:
+                return "info";
+        }
+    }
+
     public function completeProject($id_project)
     {
         $api = new CoverageApiController($this->db);
@@ -122,7 +162,6 @@ class CoverageFrontController
 
     public function configureProject($id_project, Request $request)
     {
-        var_dump($id_project);
         $project = CoverageProject::findOne(["id_project" => $id_project]);
         if ($project->isNew()) {
             return new Response("project not found", 404);
@@ -163,6 +202,9 @@ class CoverageFrontController
     {
         $result = $this->db->execute("DELETE FROM cc_lines WHERE id_session = ?",array($session->id_session));
         if($result->isValid()) {
+            $result = $this->db->execute("DELETE FROM cc_data WHERE id_session = ?", array($session->id_session));
+        }
+        if($result->isValid()) {
             echo "<br>deleted session [".$session->id_session."]: ".$this->db->getAffectedRows()." lines";
             return $session->delete();
         } else {
@@ -180,6 +222,10 @@ class CoverageFrontController
             throw new Exception($result->getErrorMessage());
         }
 
+    }
+
+    private function convertLevel($severity)
+    {
     }
 
 }
