@@ -112,7 +112,7 @@ class CoverageFrontController
         $data = CoverageData::find([
             "id_session" => $id_session,
             "type"=>$type_data
-        ],["count"=>"DESC"]);
+        ],["severity"=>"DESC","count"=>"DESC"]);
         $custom_data = [];
         /** @var CoverageData $oneData */
         foreach($data as $oneData) {
@@ -203,6 +203,15 @@ class CoverageFrontController
         $result = $this->db->execute("DELETE FROM cc_lines WHERE id_session = ?",array($session->id_session));
         if($result->isValid()) {
             $result = $this->db->execute("DELETE FROM cc_data WHERE id_session = ?", array($session->id_session));
+        }
+        if($result->isValid()) {
+            $result = $this->db->execute("DELETE FROM cc_callback WHERE id_session = ?", array($session->id_session));
+        }
+        if($result->isValid()) {
+            $result = $this->db->execute("DELETE FROM cc_callback_url WHERE id_session = ?", array($session->id_session));
+        }
+        if($result->isValid()) {
+            $result = $this->db->execute("DELETE FROM cc_url WHERE id_session = ?", array($session->id_session));
         }
         if($result->isValid()) {
             echo "<br>deleted session [".$session->id_session."]: ".$this->db->getAffectedRows()." lines";

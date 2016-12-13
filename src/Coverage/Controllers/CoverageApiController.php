@@ -2,18 +2,23 @@
 
 namespace Efrogg\Coverage\Controllers;
 
+use Efrogg\Coverage\Storage\CoverageCallback;
+use Efrogg\Coverage\Storage\CoverageCallbackUrl;
 use Efrogg\Coverage\Storage\CoverageData;
 use Efrogg\Coverage\Storage\CoverageFile;
 use Efrogg\Coverage\Storage\CoverageProject;
 use Efrogg\Coverage\Storage\CoverageProjectExplorer;
 use Efrogg\Coverage\Storage\CoverageSession;
 use Efrogg\Coverage\Storage\CoverageStorageInstaller;
+use Efrogg\Coverage\Storage\CoverageUrl;
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Tools\DbTools;
 use Efrogg\Webservice\Webservice;
+use PicORM\Exception;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CoverageApiController extends Webservice
@@ -110,16 +115,29 @@ class CoverageApiController extends Webservice
 
 //            $session->addLines($lines);
         }
+        $url = null;
 
         foreach($customData as $type => $type_data) {
+            if(!empty($type_data)) {
+                // on a de la data (error / deprecated
+                // on stocke l'url
+                if(null === $url) {
+                    $url = CoverageUrl::findOrCreate([
+                        "url"=>$data["url"],
+                        "id_session"=>$session->id_session,
+                    ]);
+                    if($url->isNew()) {
+                        $url -> save();
+                    }
+                }
+            }
+
             foreach($type_data as $hash => $one_data) {
                 $data = CoverageData::findOrCreate(array(
                     "hash" => $hash,
                     "id_session" => (int)$session->id_session
                 ));
                 if($data->isNew()) {
-//                    $data->hash = $hash;
-//                    $data->type = $type;
                     $data->type = $type;
                     $data->detail = json_encode($one_data["data"]);
                     $data->severity = $one_data["severity"];
@@ -128,6 +146,38 @@ class CoverageApiController extends Webservice
                     $data->count += $one_data["count"];
                 }
                 $data->save();
+
+
+                foreach($one_data["backtrace"] as $hash_trace => $traceDetail) {
+                    $traceModel = CoverageCallback::findOrCreate([
+                       "id_data"=>$data->id_data,
+                        "id_session"=>$session->id_session,
+                        "hash"=>$hash_trace
+                    ]);
+                    if($traceModel -> isNew()) {
+                        $traceModel->count = $traceDetail["count"];
+                        $traceModel->detail = json_encode($traceDetail["trace"]);
+                    } else {
+                        $traceModel->count += $traceDetail["count"];
+                    }
+                    $traceModel->save();
+
+                    try{
+
+                        $link = CoverageCallbackUrl::findOrCreate([
+                            "id_callback"=>$traceModel->id_callback,
+                            "id_url"=>$url->id_url,
+                        ]);
+                        if($link->isNew()) {
+                            $link->id_session = $session->id_session;
+                            $link->save();
+                        }
+                    } catch(Exception $e) {
+                        var_dump($e);
+                    }
+                }
+
+
             }
         }
 
