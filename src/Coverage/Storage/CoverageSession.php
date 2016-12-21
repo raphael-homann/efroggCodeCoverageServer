@@ -52,14 +52,19 @@ class CoverageSession extends StorageModel
         $final = [
             "errors" => [],
             "deprecated"=>[],
+            "mysql"=>[],
         ];
-        foreach($this->db->execute("SELECT severity,count(*) AS nb FROM cc_data WHERE id_session = ? AND type='error' GROUP BY severity ",
+        foreach($this->db->execute("SELECT severity,count(*) AS distinct_nb, SUM(count) AS nb FROM cc_data WHERE id_session = ? AND type='error' GROUP BY severity ",
             array($this->id_session))->fetchAll() as $error) {
             $final["errors"][$this->convertSeverity($error["severity"])] = $error["nb"];
         }
-        foreach($this->db->execute("SELECT severity,count(*) AS nb FROM cc_data WHERE id_session = ? AND type='deprecated' GROUP BY severity ",
+        foreach($this->db->execute("SELECT severity,count(*) AS distinct_nb, SUM(count) AS nb FROM cc_data WHERE id_session = ? AND type='deprecated' GROUP BY severity ",
             array($this->id_session))->fetchAll() as $error) {
             $final["deprecated"][$this->convertSeverity($error["severity"])] = $error["nb"];
+        }
+        foreach($this->db->execute("SELECT severity,count(*) AS distinct_nb, SUM(count) AS nb FROM cc_data WHERE id_session = ? AND type='mysql' GROUP BY severity ",
+            array($this->id_session))->fetchAll() as $error) {
+            $final["mysql"][$this->convertSeverity($error["severity"])] = $error["nb"];
         }
         return $final;
 

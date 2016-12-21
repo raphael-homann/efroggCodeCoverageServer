@@ -1,7 +1,7 @@
 {% extends "global.twig" %}
 
 {% block content %}
-    {% for level,data_level in custom_data %}
+    {% for level,data_level in custom_data_detail %}
         {#<pre>{{ dump(data_level) }}</pre>#}
         <div class="panel panel-{{ level }}">
             <!-- Default panel contents -->
@@ -14,6 +14,7 @@
                     {% for key,value in data_level[0].data %}
                         <th>{{ key }}</th>
                     {% endfor %}
+                    <th>detail</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,6 +24,7 @@
                         {% for key,value in data.data %}
                             <td>{{ value }}</td>
                         {% endfor %}
+                        <td><a href="/session/{{ session.id_session }}/data/detail/{{ data.id_data }}">detail</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

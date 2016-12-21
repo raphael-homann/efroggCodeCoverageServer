@@ -14,7 +14,7 @@
     <title>{% block title %}Code coverage{% endblock %}</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb" style="margin-bottom: 5px;">
     {% block breadcrumb %}
         <li><a href='/'>Home</a></li>
@@ -23,6 +23,9 @@
         {% endif %}
         {% if session is defined %}
             <li class="active"><a href="/session/{{ session.id_session }}" >S{{ session.id_session }}</a></li>
+        {% endif %}
+        {% if custom_data_type is defined %}
+            <li class="active"><a href="/session/{{ session.id_session }}/data/{{ custom_data_type }}" >{{ custom_data_type }}</a></li>
         {% endif %}
 
     {% endblock %}

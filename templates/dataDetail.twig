@@ -1,0 +1,67 @@
+{% extends "global.twig" %}
+
+{% block content %}
+    <ul>
+
+
+    </ul>
+    {#{{ dump(data) }}#}
+    <div class="panel panel-{{ level }}">
+        <!-- Default panel contents -->
+        <div class="panel-heading">level : {{ level }}</div>
+        <div class="panel-body">
+            {% for type_info,info in custom_data.detail|json_decode %}
+                <li><strong>{{ type_info }}</strong> : {{ info }}</li>
+            {% endfor %}
+        </div>
+        <!-- Table -->
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>nb</th>
+                {#{% for key,value in data_level[0].data %}#}
+                <th>stack</th>
+                <th>url</th>
+                {#{% endfor %}#}
+                {#<th>detail</th>#}
+            </tr>
+            </thead>
+            <tbody>
+            {% for callback in callback_list %}
+            {% set detail=callback.detail|json_decode %}
+            {#<p>type : {{ callback.type }}</p>#}
+            {#{{ dump(detail) }};#}
+            {#{% for cburl in callback.getCoverageCallbackUrl() %}#}
+            {#{{ dump(cburl.getCoverageUrl()) }}#}
+            {#{% endfor %}#}
+            {#<pre>#}
+            {#{{ dump(callback.getCoverageCallbackUrl()) }}#}
+            {#</pre>#}
+            {#<pre>{{ dump(data_level) }}</pre>#}
+            {#{% for data in data_level %}#}
+            <tr>
+                <th scope="row">{{ callback.count }}</th>
+                {#{% for key,value in data.data %}#}
+                <td><ol>
+                        {% for stack_level in detail %}
+                            <li>{{ stack_level |raw }}</li>
+                        {% endfor %}
+                    </ol>
+                    {#{{ detail|join("<br>")|raw }}#}
+                </td>
+                <td><ul>
+                    {% for url in callback.getCoverageCallbackUrl() %}
+                        <li>
+                        {{ url.getCoverageUrl().url }}<br>
+                        </li>
+                    {% endfor %}</td>
+                    </ul>
+                {#{% endfor %}#}
+                {#<td><a href="/session/{{ session.id_session }}/data/detail/{{ data.id_data }}">detail</a></td>#}
+            </tr>
+            {#{% endfor %}#}
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

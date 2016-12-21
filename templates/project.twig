@@ -38,17 +38,24 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <a href="/session/{{ session.id_session }}/data/error" class="btn btn-primary">errors</a>
                 {% if custom_data.errors.notice is defined %}<span class="label label-info">{{ custom_data.errors.notice }} notice</span>{% endif %}
-                {% if custom_data.errors.warning is defined %}<span class="label label-info">{{ custom_data.errors.warning }} warning</span>{% endif %}
+                {% if custom_data.errors.warning is defined %}<span class="label label-warning">{{ custom_data.errors.warning }} warning</span>{% endif %}
                 {% if custom_data.errors.danger is defined %}<span class="label label-danger">{{ custom_data.errors.danger }} danger</span>{% endif %}
                 {% if custom_data.errors.error is defined %}<span class="label label-danger">{{ custom_data.errors.error }} error</span>{% endif %}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <a href="/session/{{ session.id_session }}/data/mysql" class="btn btn-primary">mysql</a>
+                {% if custom_data.mysql.notice is defined %}<span class="label label-info">{{ custom_data.mysql.notice }} notice</span>{% endif %}
+                {% if custom_data.mysql.warning is defined %}<span class="label label-warning">{{ custom_data.mysql.warning }} warning</span>{% endif %}
+                {% if custom_data.mysql.danger is defined %}<span class="label label-danger">{{ custom_data.mysql.danger }} danger</span>{% endif %}
+                {% if custom_data.mysql.error is defined %}<span class="label label-danger">{{ custom_data.mysql.error }} error</span>{% endif %}
+            </div>
+            <div class="col-md-4">
                 <a href="/session/{{ session.id_session }}/data/deprecated" class="btn btn-primary">deprecated</a>
                 {% if custom_data.deprecated.notice is defined %}<span class="label label-info">{{ custom_data.deprecated.notice }} notice</span>{% endif %}
-                {% if custom_data.deprecated.warning is defined %}<span class="label label-info">{{ custom_data.deprecated.warning }} warning</span>{% endif %}
+                {% if custom_data.deprecated.warning is defined %}<span class="label label-warning">{{ custom_data.deprecated.warning }} warning</span>{% endif %}
                 {% if custom_data.deprecated.danger is defined %}<span class="label label-danger">{{ custom_data.deprecated.danger }} danger</span>{% endif %}
                 {% if custom_data.deprecated.error is defined %}<span class="label label-danger">{{ custom_data.deprecated.error }} error</span>{% endif %}
             </div>

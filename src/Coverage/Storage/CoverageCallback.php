@@ -34,7 +34,7 @@ class CoverageCallback extends StorageModel
     protected static function defineRelations()
     {
         // une session a un projet
-//        self::addRelationOneToOne('id_project','\\Efrogg\\Coverage\\Storage\\CoverageProject','id_project');
+        self::addRelationOneToMany('id_callback',CoverageCallbackUrl::class,'id_callback');
     }
 
 }

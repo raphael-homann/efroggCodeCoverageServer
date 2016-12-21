@@ -7,6 +7,7 @@
  */
 
 use Efrogg\Coverage\Provider\CoverageFrontProvider;
+use Efrogg\Coverage\Renderer\CoverageTwigExtension;
 use Efrogg\Db\Adapters\Pdo\PdoDbAdapter;
 use PicORM\PicORM;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -32,6 +33,7 @@ $application["twig"] = function() {
             'debug' => true,
         ));
     $twig->addExtension(new Twig_Extension_Debug());
+    $twig->addExtension(new CoverageTwigExtension());
     return $twig;
 };
 

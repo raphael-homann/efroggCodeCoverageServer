@@ -10,6 +10,7 @@ namespace Efrogg\Coverage\Controllers;
 
 
 use Efrogg\Coverage\Renderer\CoverageDirectoryRenderer;
+use Efrogg\Coverage\Storage\CoverageCallback;
 use Efrogg\Coverage\Storage\CoverageData;
 use Efrogg\Coverage\Storage\CoverageFile;
 use Efrogg\Coverage\Storage\CoverageProject;
@@ -118,13 +119,15 @@ class CoverageFrontController
         foreach($data as $oneData) {
             $custom_data[$this->convertSeverity($oneData->severity)][] = [
                 "count"=>$oneData->count,
-                "data"=>json_decode($oneData->detail,true)
+                "data"=>json_decode($oneData->detail,true),
+                "id_data"=>$oneData->id_data
             ];
         }
         return new Response($this->twig->render("data.twig", [
             "session" => $session,
             "project" => $project,
-            "custom_data"=>$custom_data
+            "custom_data_type"=>$type_data,
+            "custom_data_detail"=>$custom_data
         ]));
 
     }
@@ -233,8 +236,24 @@ class CoverageFrontController
 
     }
 
-    private function convertLevel($severity)
-    {
+    public function displayDataDetail($id_session,$id_data) {
+        $session = CoverageSession::findOne(["id_session"=>$id_session]);
+        $project = CoverageProject::findOne(["id_project"=>$session->id_project]);
+        $custom_data = CoverageData::findOne(["id_data"=>$id_data]);
+
+        $callback_list= CoverageCallback::find([
+//            "id_callback"=>$id_callback,
+            "id_data"=>$id_data
+        ]);
+        return new Response($this->twig->render("dataDetail.twig", [
+            "session" => $session,
+            "project" => $project,
+            "custom_data_type"=>$custom_data->type,
+            "custom_data"=>$custom_data,
+            "callback_list"=>$callback_list,
+            "level"=>"info",    //TODO
+        ]));
+
     }
 
 }
