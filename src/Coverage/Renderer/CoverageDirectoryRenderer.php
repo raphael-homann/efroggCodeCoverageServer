@@ -193,6 +193,7 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
 //        exit;
 //            $scale = $max_lines;
             $scale = $item["effective_lines"];
+            $scale = $item["total_lines"];
 //            $scale = $scale;
             if($item["effective_lines"]>0) {
 //                $ratio = pow($item["effective_lines"],$pow)/$max_ratio;
@@ -202,6 +203,7 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
                 $item["percent_covered"] = floor(1000*($item['covered'])*1 / $scale)/10;
                 $item["percent_uncovered"] = floor(1000*($item['uncovered'])*1 / $scale)/10;
                 $item["percent_deadcode"] = floor(1000*($item['deadcode'])*1 / $scale)/10;
+                $item["percent_useless"] = floor(1000*($item['total_lines']-$item['effective_lines'])*1 / $scale)/10;
 //                $item["percent_deadcode"] = floor(1000*($item['deadcode'])/ $scale)/10;
                 $item["ratio"] = 30+max(0,floor(700*$ratio)/10);
             } else {
@@ -211,8 +213,9 @@ class CoverageDirectoryRenderer extends DirectoryRenderer
 //                $item["percent_deadcode"] = 100*round($item['deadcode'] / $item["total_lines"], 3);
 //            } else {
                 $item["percent_covered"] = 0;
-                $item["percent_uncovered"] = 0;
+                $item["percent_uncovered"] = 100;
                 $item["percent_deadcode"] = 0;
+                $item["percent_useless"] = 0;
             }
         }
     }
